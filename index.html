@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Morning</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: #333;
+            background: linear-gradient(135deg, #fbc2eb, #a6c0fe); /* Gradient background */
+            transition: background 1s ease-in-out;
+        }
+        #message {
+            position: relative;
+            font-size: 2.5em;
+            color: #ffffff;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            z-index: 1;
+        }
+        #message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animated-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .animated-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #loveSection {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 105, 180, 0.8); /* Light pink overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+        }
+        #loveContent {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #loveContent h2 {
+            font-size: 2.5em;
+            color: #ff69b4; /* Hot pink color */
+        }
+        #loveContent button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="message"> 
+        <p>Good Morning! 👻</p>
+        <button class="animated-button" id="showMoreButton">Show More</button>
+    </div>
+    <div id="loveSection">
+        <div id="loveContent">
+            <h2>Love You! 🫰🏽💕</h2>
+            <button class="animated-button" id="showLessButton">Show Less</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const message = document.getElementById('message');
+            const loveSection = document.getElementById('loveSection');
+            const showMoreButton = document.getElementById('showMoreButton');
+            const showLessButton = document.getElementById('showLessButton');
+
+            // Show the message on page load
+            setTimeout(function() {
+                message.classList.add('visible');
+            }, 500); // Delay before message starts fading in
+
+            // Handle "Show More" button click
+            showMoreButton.addEventListener('click', function() {
+                // Refresh the page to show "Love You"
+                window.location.search = '?showLove=true';
+            });
+
+            // Handle "Show Less" button click
+            showLessButton.addEventListener('click', function() {
+                // Reload the page to reset to initial state
+                window.location.search = '';
+            });
+
+            // Check URL parameters to determine what to show
+            if (window.location.search === '?showLove=true') {
+                message.style.display = 'none';
+                loveSection.style.display = 'flex';
+                document.body.style.background = 'linear-gradient(135deg, #ffb3e6, #ff6666)'; // Updated background
+            } else {
+                loveSection.style.display = 'none';
+                document.body.style.background = 'linear-gradient(135deg, #fbc2eb, #a6c0fe)'; // Initial background
+            }
+        });
+    </script>
+</body>
+</html>
